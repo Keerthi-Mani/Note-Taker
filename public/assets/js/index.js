@@ -4,6 +4,7 @@ var newNotebody = $(".note-textarea");
 var submitBtn = $(".save-note");
 var deleteBtn = $(".delete-note");
 
+
 // Gets all newNote from the database, renders the newNote list
 var getAndRendernewNote = function () {
     $.ajax({
@@ -19,9 +20,10 @@ var getAndRendernewNote = function () {
             // Using the jQuery `data` method, we can attach data to an element for later use
             var li = $("<li class='list-group-item'>").data(newNote);
             var row = $("<div class='row'>");
-            var titleP = $("<p class='mt-2'>").body(newNote.title);
-            var newNoteP = $("<p>").body(newNote.body);
+            var titleP = $("<p class='mt-2'>").text(newNote.title);
+            var newNoteP = $("<p>").text(newNote.body);
             var clearFix = $("<div class='float-right'>");
+            var col11 = $("<div>");
             li.append(
                 row.append(
                     col11.append(titleP, newNoteP, clearFix),
@@ -43,15 +45,19 @@ $(".save-note").on("click", function (event) {
 
     var newNote = {
         title: $(".note-title").val().trim(),
-        content: $(".note-textarea").val().trim()
+        body: $(".note-textarea").val().trim()
     };
-    if (!newNote.title || !newNote.content) {
+    if (!newNote.title || !newNote.body) {
         alert("Please fill out the required fields");
         return;
     }
 
-    $.post("/api/notes", newNote, function (data) {
+    console.log(newNote)
+
+    $.post("/api/newNote", newNote, function (data) {
         $(".note-title").val("");
         $(".note-textarea").val("");
     });
 });
+
+getAndRendernewNote();

@@ -1,9 +1,4 @@
 var newNoteList = $(".list-group");
-var newNotetitle = $(".note-title");
-var newNotebody = $(".note-textarea");
-var submitBtn = $(".save-note");
-var deleteBtn = $(".delete-note");
-
 
 // Gets all newNote from the database, renders the newNote list
 var getAndRendernewNote = function () {
@@ -12,21 +7,22 @@ var getAndRendernewNote = function () {
         method: "GET"
     }).then(function (data) {
         var listItems = [];
-
         // Loop through and build a list item for each newNote returned from the db
         for (var i = 0; i < data.length; i++) {
             var newNote = data[i];
 
             // Using the jQuery `data` method, we can attach data to an element for later use
-            var li = $("<li class='list-group-item'>").data(newNote);
+            var li = $("<li class='list-group-item'>");
             var row = $("<div class='row'>");
             var titleP = $("<p class='mt-2'>").text(newNote.title);
             var newNoteP = $("<p>").text(newNote.body);
             var clearFix = $("<div class='float-right'>");
+            var delButton = $(`<i class="delete fas fa-trash-alt float-right text-danger delete-note"></i>`).attr("data-id", newNote.id);
             var col11 = $("<div>");
-            li.append(
+
+            li.prepend(
                 row.append(
-                    col11.append(titleP, newNoteP, clearFix),
+                    col11.append(titleP, newNoteP, delButton, clearFix),
                 )
             );
 
@@ -35,9 +31,22 @@ var getAndRendernewNote = function () {
 
         newNoteList.empty();
 
-        newNoteList.append(listItems);
+        newNoteList.prepend(listItems);
     });
 };
+
+$(document).on("click", ".delete", function (event) {
+
+    var id = $(this).attr("data-id");
+
+    $.ajax({
+        url: "/api/note/" + id,
+        method: "DELETE"
+    }).then(function (res) {
+        //console.log(res);
+        getAndRendernewNote();
+    })
+})
 
 // Submits the newNote from the form to the db
 $(".save-note").on("click", function (event) {
@@ -57,7 +66,9 @@ $(".save-note").on("click", function (event) {
     $.post("/api/newNote", newNote, function (data) {
         $(".note-title").val("");
         $(".note-textarea").val("");
+        getAndRendernewNote();
     });
+
 });
 
 getAndRendernewNote();

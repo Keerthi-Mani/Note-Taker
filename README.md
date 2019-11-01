@@ -32,7 +32,12 @@ Now, open the local application on port 3306 at the URL: http://localhost:3306/.
 
 ## Screenshots
 
+#### Homepage
 <img width="1438" alt="Screen Shot 2019-10-31 at 3 50 34 PM" src="https://user-images.githubusercontent.com/52920074/67981097-42a2c180-fbf6-11e9-99c5-1c6fa5549517.png">
+
+#### Notes
+<img width="1329" alt="Screen Shot 2019-10-31 at 10 16 24 PM" src="https://user-images.githubusercontent.com/52920074/67997849-5406c080-fc2c-11e9-9e7f-0520104ecd62.png">
+
 
 ## Copyright
 @ Keerthi Mani 2019. All Rights Reserved.

@@ -14,10 +14,10 @@ var getAndRendernewNote = function () {
             // Using the jQuery `data` method, we can attach data to an element for later use
             var li = $("<li class='list-group-item'>");
             var row = $("<div class='row'>");
-            var titleP = $("<p class='mt-2'>").text(newNote.title);
+            var titleP = $("<h4 class='mt-2'>").text(newNote.title);
             var newNoteP = $("<p>").text(newNote.body);
             var clearFix = $("<div class='float-right'>");
-            var delButton = $(`<i class="delete fas fa-trash-alt float-right text-danger delete-note"></i>`).attr("data-id", newNote.id);
+            var delButton = $(`<i class="delete fas fa-trash-alt text-danger delete-note"></i>`).attr("data-id", newNote.id);
             var col11 = $("<div>");
 
             li.prepend(

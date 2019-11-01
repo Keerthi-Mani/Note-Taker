@@ -15,24 +15,21 @@ var getAndRendernewNote = function () {
             var li = $("<li class='list-group-item'>");
             var row = $("<div class='row'>");
             var textRow = $("<div class='titleRow'>");
-            var titleP = $("<h4 class='mt-2'>").text(newNote.title);
+            var titleP = $("<h4 class='mt-2 col 3'>").text(newNote.title);
             var newNoteP = $("<p>").text(newNote.body);
             var delButton = $(`<i class="delete fas fa-trash-alt text-danger"></i>`).attr("data-id", newNote.id);
-            var col11 = $("<div>");
-
-            row.append(titleP, delButton);
+            var clearFix = $("<div class = clearfix>");
+            row.append(titleP, delButton, clearFix);
             textRow.append(newNoteP);
             li.append(row, textRow);
-
             listItems.push(li);
         }
-
         newNoteList.empty();
-
-        newNoteList.prepend(listItems);
+        newNoteList.append(listItems);
     });
 };
 
+//onclick function to delete the existing notes 
 $(document).on("click", ".delete", function (event) {
 
     var id = $(this).attr("data-id");
@@ -49,7 +46,7 @@ $(document).on("click", ".delete", function (event) {
 // Submits the newNote from the form to the db
 $(".save-note").on("click", function (event) {
     event.preventDefault();
-
+    //receives the users input from the html page
     var newNote = {
         title: $(".note-title").val().trim(),
         body: $(".note-textarea").val().trim()
@@ -60,7 +57,7 @@ $(".save-note").on("click", function (event) {
     }
 
     console.log(newNote)
-
+    // post the users input in the browser and empties the input field
     $.post("/api/newNote", newNote, function (data) {
         $(".note-title").val("");
         $(".note-textarea").val("");

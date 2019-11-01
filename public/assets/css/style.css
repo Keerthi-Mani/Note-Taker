@@ -1,13 +1,14 @@
 h4 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 p {
     font-size: 16px;
 }
 
-.delete,
-h4 {
+.delete {
     cursor: pointer;
+    display: inline-block;
 }

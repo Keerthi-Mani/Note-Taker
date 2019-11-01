@@ -10,7 +10,7 @@ var bodyParser = require("body-parser")
 var app = express();
 
 // Sets an initial port. We"ll use this later in our listener
-var PORT = process.env.PORT || 3306;
+var PORT = process.env.PORT || 8080;
 
 app.use(express.static('public'));
 
